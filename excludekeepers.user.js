@@ -6,21 +6,16 @@
 // @require  		http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.1.min.js
 // ==/UserScript==
 (function() {
-
 	console.log("only here...");
 	
 	console.log('a' + $("img").length);
-	console.log('e' + $('img[src$="keeper_indicator.gif"]').length);     
+	var keepers = $('img[src$="keeper_indicator.gif"]');
+	
+	console.log('b' + keepers.length);
+
+	keepers.each(function(index, elm){
+		console.log($(elm).closest('tr').find("input:checkbox").length);
+	});   
 	
 	console.log("end...");
-
-
-//    unsafeWindow.$('div').live('blur',function(){
-//    });
-
-
-
-
-	
-
 })();
