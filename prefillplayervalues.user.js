@@ -12,9 +12,6 @@ var players = new Array();
 
 getPlayers();
 
-setPlayerValues();
-
-
 document.addEventListener("DOMNodeInserted", getInfo, false);
 
 function getInfo(event)
@@ -27,16 +24,17 @@ function getInfo(event)
 
 function getPlayers()
 {
-GM_xmlhttpRequest(
-{
-    method: 'GET',
-    url: priceGuideURL,
-    onload: function( responseDetails )
-    {
-      buildPlayersHash(responseDetails.responseText);
-      showValues();
-    },
-});
+	console.log("....getPlayers was called....");
+	GM_xmlhttpRequest(
+	{
+	    method: 'GET',
+	    url: priceGuideURL,
+	    onload: function( responseDetails )
+	    {
+	      buildPlayersHash(responseDetails.responseText);
+	      showValues();
+	    },
+	});
 }
 
 function buildPlayersHash(playersCSV)
@@ -63,7 +61,6 @@ function buildPlayersHash(playersCSV)
 
 function showValues()
 {
-	/*
    var playerMatch = /.*sports\.yahoo\.com\/mlb\/players\/(\d\d\d\d)$/;
 
    var tags = document.getElementsByTagName("a");
@@ -78,40 +75,13 @@ function showValues()
          if (players[playerID] != null)
          {
             var dollarValue = players[playerID];
+            var playerValueInput = $(document).find("input[name$='players[" + playerID + "][auction_cost]']");
+			if(dollarValue < 0)
+				dollarValue = 1            
+            $(playerValueInput).val(dollarValue);
 
-            if (tags[i].innerHTML.indexOf(dollarValue) < 0)
-            {
-               tags[i].innerHTML = tags[i].innerHTML + " " + dollarValue;
-            }
-
-            console.log(  $(tags[i]).closest('tr').siblings().find("input[class$='auction-cost']").length );
-            //var playerValue = $(tags[i]).closest('tr').siblings().find("input[class$='auction-cost']");
-            //if(playerValue){
-            //	console.log($(playerValue).val());
-            //}
          }
       }
    }
-   */
 }
-
-
-function setPlayerValues(){
-	var playerValueInputs = $(document).find("input[class$='auction-cost']");
-	playerValueInputs.each(function(index, elm){
-		var myString = $(elm).attr('name');
-
-		var part1 = myString.split("[");
-		var playerNumber = part1[1].slice(0,part1[1].length-1);
-		console.log(playerNumber);
-
-		//var myRegexp = /(players\[)([0-9])+(\]\[auction_cost\])/g;
-		//var match = myRegexp.exec(myString);		
-		//if(match)
-		//	console.log(match);
-		//else
-		//	console.log("no match");
-	});   
-}
-
 })();
