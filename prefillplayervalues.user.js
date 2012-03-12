@@ -24,7 +24,6 @@ function getInfo(event)
 
 function getPlayers()
 {
-	console.log("....getPlayers was called....");
 	GM_xmlhttpRequest(
 	{
 	    method: 'GET',
