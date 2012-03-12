@@ -6,16 +6,10 @@
 // @require  		http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.1.min.js
 // ==/UserScript==
 (function() {
-	console.log("only here...");
-	
-	console.log('a' + $("img").length);
 	var keepers = $('img[src$="keeper_indicator.gif"]');
-	
-	console.log('b' + keepers.length);
-
 	keepers.each(function(index, elm){
 		$(elm).closest('tr').find("input:checkbox").prop("checked", true);
 	});   
-	
-	console.log("end...");
+
+	//$('#ysf-preauctioncosts-save').removeClass('ysf-cta-disabled');
 })();
