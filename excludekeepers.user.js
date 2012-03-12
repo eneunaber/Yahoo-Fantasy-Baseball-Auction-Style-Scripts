@@ -14,7 +14,7 @@
 	console.log('b' + keepers.length);
 
 	keepers.each(function(index, elm){
-		console.log($(elm).closest('tr').find("input:checkbox").length);
+		$(elm).closest('tr').find("input:checkbox").prop("checked", true);
 	});   
 	
 	console.log("end...");
