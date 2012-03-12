@@ -7,8 +7,20 @@
 // ==/UserScript==
 (function() {
 
-
 	console.log("only here...");
+	
+	console.log('a' + $("img").length);
+	console.log('e' + $('img[src$="keeper_indicator.gif"]').length);     
+	
+	console.log("end...");
+
+
+//    unsafeWindow.$('div').live('blur',function(){
+//    });
+
+
+
+
 	
 
 })();
