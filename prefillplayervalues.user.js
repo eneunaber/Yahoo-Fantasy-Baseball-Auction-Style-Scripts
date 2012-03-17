@@ -12,8 +12,6 @@
    getPlayers();
 
    function populatePrices(){
-      console.log("players:" + players.length); 
-
       var playerMatch = /.*sports\.yahoo\.com\/mlb\/players\/(\d\d\d\d)$/;
 
       var tags = document.getElementsByTagName("a");
@@ -31,7 +29,14 @@
             dollarValue = 1            
          $(playerValueInput).val(dollarValue);          
         }
-      }     
+      }
+      activateSaveButton();     
+   }
+
+   function activateSaveButton()
+   {
+      $("#ysf-preauctioncosts-save").removeClass().addClass("ysf-cta ysf-cta-main ysf-cta-save ysf-cta-in-page-submit-active");
+      console.log("done...");
    }
 
 
@@ -51,7 +56,6 @@
 
    function buildPlayersHash(playersCSV)
    {
-      console.log("begin buildPlayersHash...");
       var playerValues = playersCSV.split("\n");
 
       for (var i = 0; i < playerValues.length - 1; i++)
@@ -69,6 +73,5 @@
         }
         players[ player[0] ] = dollarValue;
       }
-      console.log("end buildPlayersHash...");
    }   
 })();
