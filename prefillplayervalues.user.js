@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           	Pre-Fill Player Values For Yahoo Draft
 // @namespace      	com.yahoo.fantasy.baseball
-// @copyright      	2011, Eric Neunaber
+// @copyright      	2012, Eric Neunaber, Mays Copeland (http://www.lastplayerpicked.com) and Bert Sanders
 // @include        	http://baseball.fantasysports.yahoo.com/b1/*/prerank_auction_costs*
 // @require  		http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.1.min.js
 // ==/UserScript==
@@ -10,6 +10,11 @@
    var players = new Array();
 
    getPlayers();
+
+   window.addEventListener("load", function(e) {
+      activateSaveButton();
+   }, false);
+
 
    function populatePrices(){
       var playerMatch = /.*sports\.yahoo\.com\/mlb\/players\/(\d\d\d\d)$/;
@@ -30,13 +35,16 @@
          $(playerValueInput).val(dollarValue);          
         }
       }
-      activateSaveButton();     
    }
 
    function activateSaveButton()
    {
-      $("#ysf-preauctioncosts-save").removeClass().addClass("ysf-cta ysf-cta-main ysf-cta-save ysf-cta-in-page-submit-active");
-      console.log("done...");
+      var lastCheckbox = $('input[name$="[is_excluded]"]').last();
+      var isChecked = $(lastCheckbox).prop("checked");
+      $(lastCheckbox).prop("checked", !isChecked);
+      $(lastCheckbox).prop("checked", isChecked);
+
+      console.log("activateSaveButton...");
    }
 
 
